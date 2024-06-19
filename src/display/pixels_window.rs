@@ -16,13 +16,16 @@ pub async fn build_pixels_window(
     mut receiver: Receiver<WindowCommand>,
     console_handler: Arc<Result<Console, Box<dyn Error + Send + Sync>>>
 ) {
+    let window_width = 400;
+    let window_height = 300 ad;
+
     // Create an event loop
     let event_loop = EventLoop::new();
 
     // Create a window
     let window = WindowBuilder::new()
         .with_title("Pixels Example")
-        .with_inner_size(LogicalSize::new(1280, 800))
+        .with_inner_size(LogicalSize::new(window_width, window_height))
         .build(&event_loop)
         .unwrap();
 
@@ -33,7 +36,7 @@ pub async fn build_pixels_window(
     );
 
     // Create a Pixels instance
-    let mut pixels = Pixels::new(1280, 800, surface_texture).unwrap();
+    let mut pixels = Pixels::new(window_width, window_height, surface_texture).unwrap();
 
     // Connect to the console and register the DBus listener
     let sender_clone = sender.clone();
@@ -96,8 +99,8 @@ fn update_frame_from_dmabuf(frame: &mut [u8], buffer: &[u8]) {
     println!("Updating the pixels frame from DMABUF");
     // Manipulate the pixel buffer
     // for (i, pixel) in frame.chunks_exact_mut(4).enumerate() {
-    //     let x = (i % 1280) as u8;
-    //     let y = (i / 800) as u8;
+    //     let x = (i % 340) as u8;
+    //     let y = (i / 220) as u8;
     //     pixel[0] = x; // R
     //     pixel[1] = y; // G
     //     pixel[2] = 0; // B
