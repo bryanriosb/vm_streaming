@@ -96,7 +96,6 @@ impl Console {
                 let mut listener_guard = self.listener.write().await;
                 *listener_guard = Some(connection);
                 println!("Registered listener");
-                // tokio::signal::ctrl_c().await?;
             }
             Err(e) => {
                 println!("Failed to build connection: {}", e);
